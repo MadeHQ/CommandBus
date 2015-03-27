@@ -34,12 +34,9 @@ module.exports = function (grunt) {
 
     uglify: {
       app: {
-        files: [{
-          expand: true,
-          cwd: '',
-          src: 'src/*.js',
-          dest: 'command-bus.min.js'
-        }]
+        files: {
+          'command-bus.min.js': 'src/*.js'
+        }
       }
     },
 
@@ -60,8 +57,6 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', [
-    'karma:unit',
-    'jshint:all',
     'uglify'
   ]);
 

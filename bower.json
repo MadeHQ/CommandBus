@@ -1,5 +1,5 @@
 {
-  "name": "CommandBus",
+  "name": "command-bus",
   "version": "1.0.0",
   "homepage": "https://github.com/MadeHQ/CommandBus",
   "authors": [
