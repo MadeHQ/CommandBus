@@ -1,0 +1,24 @@
+{
+  "name": "CommandBus",
+  "version": "1.0.0",
+  "homepage": "https://github.com/MadeHQ/CommandBus",
+  "authors": [
+    "Andrew Lowther <andrew.lowther@mademedia.co.uk>"
+  ],
+  "description": "Command bus require.js adapter",
+  "main": "command-bus.min.js",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "require.js"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

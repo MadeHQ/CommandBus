@@ -1,0 +1,39 @@
+{
+  "name": "CommandBus",
+  "version": "1.0.0",
+  "description": "Command bus for handling command execution",
+  "main": "karma.conf.js",
+  "scripts": {
+    "test": "karma start karma.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MadeHQ/CommandBus.git"
+  },
+  "author": "Andrew Lowther",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MadeHQ/CommandBus/issues"
+  },
+  "homepage": "https://github.com/MadeHQ/CommandBus",
+  "devDependencies": {
+    "chai": "^2.2.0",
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.1",
+    "grunt-contrib-uglify": "^0.8.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-karma": "^0.10.1",
+    "grunt-notify": "^0.4.1",
+    "karma": "^0.12.31",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-firefox-launcher": "^0.1.4",
+    "karma-mocha": "^0.1.10",
+    "karma-mocha-reporter": "^1.0.2",
+    "karma-requirejs": "^0.2.2",
+    "karma-sinon": "^1.0.4",
+    "load-grunt-tasks": "^3.1.0",
+    "mocha": "^2.2.1",
+    "requirejs": "^2.1.16",
+    "time-grunt": "^1.1.0"
+  }
+}
