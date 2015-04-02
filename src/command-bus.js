@@ -21,17 +21,24 @@
       };
 
       Bus.prototype.handle = function (command, callback) {
+        if (command.constructor === Object) {
+          command = command.name;
+          var args = command.arguments || {};
+        }
+
         if (this.getOption('handlers').hasOwnProperty(command)) {
           var handler = this.getOption('handlers')[command];
           if (handler.hasOwnProperty('callback')) {
             return handler.callback.apply(this, [
               handler.dependencies,
+              args,
               callback
             ]);
           } else if (handler.hasOwnProperty('handler')) {
             return require([handler.handler], function (item) {
               return item.apply(this, [
                 handler.dependencies,
+                args,
                 callback
               ]);
             });
