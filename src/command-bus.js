@@ -29,8 +29,8 @@
               callback
             ]);
           } else if (handler.hasOwnProperty('handler')) {
-            return require([handler.handler], function (handler) {
-              return handler.apply(this, [
+            return require([handler.handler], function (item) {
+              return item.apply(this, [
                 handler.dependencies,
                 callback
               ]);
