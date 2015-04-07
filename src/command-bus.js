@@ -50,9 +50,9 @@
           var handler = this.getOption('handlers')[command];
 
           try {
-            dependencies = extend(this.getOption('globalDependencies'), handler.dependencies);
+            dependencies = extend(this.getOption('globalDependencies'), (handler.dependencies || {}));
           } catch(e) {
-            dependencies = handler.dependencies;
+            dependencies = handler.dependencies || {};
           }
 
           if (handler.handler.constructor === Function) {
