@@ -31,6 +31,23 @@ define([
 
         expect(bus.getOption('handlers')).to.be.an('object');
       });
+
+      it('should accept 2 lists of options', function () {
+        bus.setOptions({
+          handlers: {
+            'get-user': function (command, callback) {}
+          }
+        });
+
+        bus.setOptions({
+          globalDependencies: {
+            sdk: {}
+          }
+        });
+
+        expect(bus.getOption('handlers')).to.be.an('object');
+        expect(bus.getOption('globalDependencies')).to.be.an('object');
+      });
     });
 
     describe('CommandBus#handle', function () {
@@ -92,6 +109,65 @@ define([
         });
 
         expect(bus.getOption('handlers')).to.be.an('object');
+      });
+    });
+
+    describe('CommandBus#setGlobalDependencies', function () {
+      it('should exist', function () {
+        expect(bus.setGlobalDependencies).to.be.a('function');
+      });
+
+      it('should set a list of global dependencies', function () {
+        bus.setGlobalDependencies({
+          sdk: {}
+        });
+
+        expect(bus.getOption('globalDependencies').sdk).to.be.an('object');
+      });
+
+      it('should pass global dependencies through to API calls', function () {
+        bus.setGlobalDependencies({
+          sdk: {}
+        });
+        bus.setHandlers({
+          'get-user': {
+            'dependencies': {},
+            'handler': function (dependencies, args, callback) {
+              return callback.call(this, dependencies);
+            }
+          }
+        });
+
+        var spy = sinon.spy();
+
+        bus.handle('get-user', spy);
+
+        expect(spy.calledWith({sdk:{}})).to.equal(true);
+      });
+
+      it('should pass global dependencies through with local ones', function () {
+        bus.setGlobalDependencies({
+          sdk: {}
+        });
+        bus.setHandlers({
+          'get-user': {
+            'dependencies': {
+              'message': 'Hello Sinon!'
+            },
+            'handler': function (dependencies, args, callback) {
+              return callback.call(this, dependencies);
+            }
+          }
+        });
+
+        var spy = sinon.spy();
+
+        bus.handle('get-user', spy);
+
+        expect(spy.calledWith({
+          sdk:{},
+          message: 'Hello Sinon!'
+        })).to.equal(true);
       });
     });
   });

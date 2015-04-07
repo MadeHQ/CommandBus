@@ -1,7 +1,9 @@
 (function () {
   'use strict';
 
-  define(function () {
+  define([
+    'extend'
+  ], function (extend) {
     var CommandBus;
 
     CommandBus = (function () {
@@ -10,12 +12,22 @@
       }
 
       Bus.prototype.setOptions = function (options) {
-        this.options = options;
+        if (this.options === null) {
+          this.options = {};
+        }
+
+        this.options = extend(this.options, options);
       };
 
       Bus.prototype.setHandlers = function (handlers) {
         this.setOptions({
           'handlers': handlers
+        });
+      };
+
+      Bus.prototype.setGlobalDependencies = function (dependencies) {
+        this.setOptions({
+          'globalDependencies': dependencies
         });
       };
 
@@ -28,6 +40,7 @@
 
       Bus.prototype.handle = function (command, callback) {
         var argv = {};
+        var dependencies = {};
         if (command.constructor === Object) {
           command = command.name;
           argv = command.arguments || {};
@@ -36,16 +49,22 @@
         if (this.getOption('handlers').hasOwnProperty(command)) {
           var handler = this.getOption('handlers')[command];
 
+          try {
+            dependencies = extend(this.getOption('globalDependencies'), handler.dependencies);
+          } catch(e) {
+            dependencies = handler.dependencies;
+          }
+
           if (handler.handler.constructor === Function) {
             return handler.handler.apply(this, [
-              handler.dependencies,
+              dependencies,
               argv,
               callback
             ]);
           } else {
             return require([handler.handler], function (item) {
               return item.apply(this, [
-                handler.dependencies,
+                dependencies,
                 argv,
                 callback
               ]);

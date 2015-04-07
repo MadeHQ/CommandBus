@@ -40,6 +40,26 @@ module.exports = function (grunt) {
       }
     },
 
+    requirejs: {
+      compile: {
+        options: {
+          baseUrl: 'src/',
+
+          out: 'command-bus.min.js',
+          optimize: 'uglify2',
+
+          include: ['command-bus'],
+          name: '../bower_components/almond/almond',
+
+          done: function (done, output) {
+            grunt.log.write(output);
+
+            done();
+          }
+        }
+      }
+    },
+
     watch: {
       scripts: {
         files: [
@@ -59,7 +79,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'karma:unit',
     'jshint:all',
-    'uglify'
+    'requirejs'
   ]);
 
 };

@@ -18,6 +18,7 @@ require.config({
 
   paths: {
     'command-bus': 'src/command-bus',
+    'extend': 'src/extend',
     'get-user': 'tests/get-user'
   },
 
