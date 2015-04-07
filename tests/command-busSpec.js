@@ -46,7 +46,7 @@ define([
           handlers: {
             'get-user': {
               'dependencies': {},
-              'callback': function (dependencies, args, callback) {
+              'handler': function (dependencies, args, callback) {
                 return callback.call();
               }
             }
@@ -85,7 +85,7 @@ define([
         bus.setHandlers({
           'get-user': {
             'dependencies': {},
-            'callback': function (dependencies, args, callback) {
+            'handler': function (dependencies, args, callback) {
               return callback.call();
             }
           }

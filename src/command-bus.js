@@ -35,13 +35,14 @@
 
         if (this.getOption('handlers').hasOwnProperty(command)) {
           var handler = this.getOption('handlers')[command];
-          if (handler.hasOwnProperty('callback')) {
-            return handler.callback.apply(this, [
+
+          if (handler.handler.constructor === Function) {
+            return handler.handler.apply(this, [
               handler.dependencies,
               argv,
               callback
             ]);
-          } else if (handler.hasOwnProperty('handler')) {
+          } else {
             return require([handler.handler], function (item) {
               return item.apply(this, [
                 handler.dependencies,
