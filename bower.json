@@ -1,6 +1,6 @@
 {
   "name": "command-bus",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "homepage": "https://github.com/MadeHQ/CommandBus",
   "authors": [
     "Andrew Lowther <andrew.lowther@mademedia.co.uk>"
@@ -20,8 +20,5 @@
     "bower_components",
     "test",
     "tests"
-  ],
-  "devDependencies": {
-    "almond": "~0.3.1"
-  }
+  ]
 }

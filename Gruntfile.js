@@ -46,10 +46,10 @@ module.exports = function (grunt) {
           baseUrl: 'src/',
 
           out: 'command-bus.min.js',
-          optimize: 'uglify2',
+          optimize: 'none',
 
           include: ['command-bus'],
-          name: '../bower_components/almond/almond',
+          //name: '../bower_components/almond/almond',
 
           done: function (done, output) {
             grunt.log.write(output);

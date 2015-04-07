@@ -1,6 +1,6 @@
 {
   "name": "command-bus",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Command bus for handling command execution",
   "main": "karma.conf.js",
   "scripts": {
