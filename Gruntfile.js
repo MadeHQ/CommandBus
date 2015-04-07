@@ -57,6 +57,8 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'karma:unit',
+    'jshint:all',
     'uglify'
   ]);
 

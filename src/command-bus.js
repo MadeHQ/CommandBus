@@ -13,6 +13,12 @@
         this.options = options;
       };
 
+      Bus.prototype.setHandlers = function (handlers) {
+        this.setOptions({
+          'handlers': handlers
+        });
+      };
+
       Bus.prototype.getOption = function (key) {
         if (this.options.hasOwnProperty(key)) {
           return this.options[key];
@@ -21,9 +27,10 @@
       };
 
       Bus.prototype.handle = function (command, callback) {
+        var argv = {};
         if (command.constructor === Object) {
           command = command.name;
-          var args = command.arguments || {};
+          argv = command.arguments || {};
         }
 
         if (this.getOption('handlers').hasOwnProperty(command)) {
@@ -31,14 +38,14 @@
           if (handler.hasOwnProperty('callback')) {
             return handler.callback.apply(this, [
               handler.dependencies,
-              args,
+              argv,
               callback
             ]);
           } else if (handler.hasOwnProperty('handler')) {
             return require([handler.handler], function (item) {
               return item.apply(this, [
                 handler.dependencies,
-                args,
+                argv,
                 callback
               ]);
             });
